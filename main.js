@@ -23,7 +23,9 @@ buttonTranslate.addEventListener("click", function (e) {
 		}
 	}
 	if (isCorrect) {
-		inputResult.value = isCode ? Decode(inputValue) : Code(inputValue);
+		inputResult.value = isCode
+			? Decode(inputValue.toLowerCase())
+			: Code(inputValue);
 	} else {
 		alert("Ошибка. Проверьте правильность данных");
 	}
@@ -38,7 +40,15 @@ buttonCopy.addEventListener("click", function (event) {
 			alert("Текст скопирован");
 		})
 		.catch((e) => {
-			alert("Ошибка при копировании текста");
+			try {
+				const textField = inputResult.value.toString();
+				textField.select();
+				textField.setSelectionRange(0, 99999);
+				document.execCommand("copy");
+				alert("Текст скопирован");
+			} catch (e) {
+				alert("Ошибка при копировании:", e);
+			}
 		});
 });
 
