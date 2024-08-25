@@ -7,7 +7,7 @@ const inputResult = document.querySelector(".in2");
 buttonTranslate.addEventListener("click", function (e) {
 	e.preventDefault();
 	let isCode = false;
-	const inputValue = inputText.value.toString();
+	const inputValue = inputText.value.toString().toLowerCase();
 	for (value of Object.values(alphabet)) {
 		if (inputValue.includes(value)) {
 			isCode = true;
@@ -23,9 +23,7 @@ buttonTranslate.addEventListener("click", function (e) {
 		}
 	}
 	if (isCorrect) {
-		inputResult.value = isCode
-			? Decode(inputValue.toLowerCase())
-			: Code(inputValue);
+		inputResult.value = isCode ? Decode(inputValue) : Code(inputValue);
 	} else {
 		alert("Ошибка. Проверьте правильность данных");
 	}
@@ -122,6 +120,8 @@ const alphabet = {
 	">": "う",
 	"<": "え",
 	"%": "お",
+	",": "四",
+	";": "五",
 	0: "ラ",
 	1: "か",
 	2: "き",
